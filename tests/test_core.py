@@ -51,6 +51,8 @@ class QueueTests(unittest.TestCase):
         self.q.note(a, "great related work section")
         self.assertEqual(len(self.q.list(tag="gnn")), 1)
         self.assertEqual(self.q.list(search="related work")[0]["id"], a)
+        self.q.note(a, "second note")
+        self.assertEqual(self.q.get(a)["notes"], "great related work section\nsecond note")
 
     def test_stats(self):
         old = ReadingQueue(":memory:", today=datetime.date(2025, 12, 1))

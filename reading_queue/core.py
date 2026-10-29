@@ -86,7 +86,7 @@ class ReadingQueue:
     def note(self, pid, text):
         self.get(pid)
         with self.db:
-            self.db.execute("UPDATE papers SET notes = TRIM(notes || char(10) || ?) WHERE id = ?", (text, pid))
+            self.db.execute("UPDATE papers SET notes = TRIM(notes || char(10) || ?, char(10) || ' ') WHERE id = ?", (text, pid))
 
     def tag(self, pid, *tags):
         with self.db:
